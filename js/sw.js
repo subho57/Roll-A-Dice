@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'cache-v1' // increment this when updating the web site
+const CACHE_VERSION = 'cache-v2' // increment this when updating the web site
 
 // add more static assets to cache
 const filesToCache=[
