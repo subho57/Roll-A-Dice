@@ -2,15 +2,15 @@ const CACHE_VERSION = 'cache-v1' // increment this when updating the web site
 
 // add more static assets to cache
 const filesToCache=[
-    "https://github.com/subho57/Roll-A-Dice/blob/master/images/favicons/dice.ico",
-    "https://github.com/subho57/Roll-A-Dice/blob/master/images/roll-dice/dice-1.png",
-    "https://github.com/subho57/Roll-A-Dice/blob/master/images/roll-dice/dice-2.png",
-    "https://github.com/subho57/Roll-A-Dice/blob/master/images/roll-dice/dice-3.png",
-    "https://github.com/subho57/Roll-A-Dice/blob/master/images/roll-dice/dice-4.png",
-    "https://github.com/subho57/Roll-A-Dice/blob/master/images/roll-dice/dice-5.png",
-    "https://github.com/subho57/Roll-A-Dice/blob/master/images/roll-dice/dice-6.png",
-    "https://github.com/subho57/Roll-A-Dice/blob/master/images/backgrounds/background-2.jpg",
-    "https://github.com/subho57/Roll-A-Dice/blob/master/images/backgrounds/background.jfif"
+    "images/favicons/dice.ico",
+    "images/roll-dice/dice-1.png",
+    "images/roll-dice/dice-2.png",
+    "images/roll-dice/dice-3.png",
+    "images/roll-dice/dice-4.png",
+    "images/roll-dice/dice-5.png",
+    "images/roll-dice/dice-6.png",
+    "images/backgrounds/background-2.jpg",
+    "images/backgrounds/background.jfif"
 ]
 self.addEventListener(
     'install',
