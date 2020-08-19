@@ -38,7 +38,7 @@ document.querySelector('.btn-roll').addEventListener('click', function () {
 
             // display result
             diceselect.style.display = 'block';
-            diceselect.src = '../images/roll-dice/dice-' + dice + '.png';
+            diceselect.src = 'images/roll-dice/dice-' + dice + '.png';
             console.log(dice);
 
             roundscore = roundscore + dice;
