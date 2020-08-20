@@ -133,12 +133,8 @@ function starting_requirement() {
     document.querySelector('.player-1-panel').classList.remove('active');
     document.querySelector('.player-0-panel').classList.add('active');
 }
-
-
-
-
-
-
-
-
-
+// load service worker
+"serviceWorker"in navigator && window.addEventListener("load", ()=>{
+    navigator.serviceWorker.register("./sw.js").then(e=>console.log("Success: ", e.scope)).catch(e=>console.log("Failure: ", e))
+}
+)

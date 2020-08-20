@@ -160,18 +160,10 @@ function starting_requirement() {
 
 function comp() {
 
-
-
-
 }
 
-
-
-
-
-
-
-
-
-
-
+// load service worker
+"serviceWorker"in navigator && window.addEventListener("load", ()=>{
+    navigator.serviceWorker.register("./sw.js").then(e=>console.log("Success: ", e.scope)).catch(e=>console.log("Failure: ", e))
+}
+)
