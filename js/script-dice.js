@@ -67,11 +67,15 @@ document.querySelector(".btn-hold").addEventListener('click', function() {
         // WINNING LOGIC  ----------  winner class is not present in html it is a class that directly present in the css file
         if (score[activeplayer] >= winningscore) {
 
-            if (activeplayer === 0)
+            if (activeplayer === 0) {
                 document.getElementById('name-0').textContent = '|| WINNER ||' + " " + name1;
+                document.getElementById('name-1').textContent = name2 + " " + '||LOST||';
+            }
 
-            else
+            else {
                 document.getElementById('name-1').textContent = '|| WINNER ||' + " " + name2;
+                document.getElementById('name-0').textContent = name1 + " " + '||LOST||';
+            }
 
             diceselect.style.display = "none";
             document.querySelector('#current-' + activeplayer).textContent = '0';
@@ -195,11 +199,15 @@ function comp() {
         // WINNING LOGIC  ----------  winner class is not present in html it is a class that directly present in the css file
         if (score[activeplayer] >= winningscore) {
 
-            if (activeplayer === 0)
+            if (activeplayer === 0) {
                 document.getElementById('name-0').textContent = '|| WINNER ||' + " " + name1;
+                document.getElementById('name-1').textContent = name2 + " " + '||LOST||';
+            }
 
-            else
+            else {
                 document.getElementById('name-1').textContent = '|| WINNER ||' + " " + name2;
+                document.getElementById('name-0').textContent = name1 + " " + '||LOST||';
+            }
 
             diceselect.style.display = "none";
             document.querySelector('#current-' + activeplayer).textContent = '0';
