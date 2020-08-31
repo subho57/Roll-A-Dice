@@ -63,13 +63,6 @@ document.querySelector(".btn-hold").addEventListener('click', function () {
         // update UI
         document.getElementById('score-' + activeplayer).textContent = score[activeplayer];
 
-
-        if (choice === '2') {
-            comp();
-        }
-
-
-
         // **************** for the input value box - user filled************************ 
         document.querySelector('.maxscore').value = highestsc;
         var winningscore;
@@ -95,21 +88,40 @@ document.querySelector(".btn-hold").addEventListener('click', function () {
             document.querySelector('.player-' + activeplayer + '-panel').classList.remove('active');
             playgame = false;
         }
-        else
-            // nextplayer ---- using DRY PRINCIPLE 
+        else { // nextplayer ---- using DRY PRINCIPLE 
             nextplayer();
+        }
 
         rolldice = 1;
+
+        if (choice === '2') {
+            comp();
+        }
     }
 });
 
 
 function nextplayer() {
-    if (activeplayer === 0) {
-        document.querySelector('#player-00').textContent = name2 + "'s" + "  " + "  turn";
+    if (choice === '1') {
+        if ((activeplayer === 0)) {
+
+            document.querySelector('#player-00').textContent = name2 + "'s" + "  " + "  turn";
+        }
+
+        else {
+            document.querySelector('#player-00').textContent = name1 + "'s" + "  " + "  turn";
+        }
     }
-    else {
-        document.querySelector('#player-00').textContent = name1 + "'s" + "  " + "  turn";
+
+    if (choice === '2') {
+        if ((activeplayer === 0)) {
+
+            document.querySelector('#player-00').textContent = name4 + "'s" + "  " + "  turn";
+        }
+
+        else {
+            document.querySelector('#player-00').textContent = name3 + "'s" + "  " + "  turn";
+        }
     }
 
     activeplayer === 0 ? activeplayer = 1 : activeplayer = 0;
@@ -158,8 +170,72 @@ function starting_requirement() {
     document.querySelector('.player-0-panel').classList.add('active');
 }
 
-function comp() {
+// *************************** FUNTIONALITY FOR COMPUTER'S TURN **********************************
 
+function comp() {
+    if (rolldice === 1) {
+        if (playgame) {
+            // randor no. create
+            var dice = Math.floor(Math.random() * 6) + 1;
+
+            // display result
+            diceselect.style.display = 'block';
+            diceselect.src = 'images/roll-dice/dice-' + dice + '.png';
+            console.log(dice);
+
+            roundscore = roundscore + dice;
+            document.querySelector('#current-' + activeplayer).textContent = roundscore;
+            // document.querySelector('#player-0').textContent =  " " ;
+
+
+            rolldice = 0;
+            // nextplayer();   
+        }
+    }
+
+    // ------------------------------------------------------------------------------------------
+
+    if (playgame) {
+        // score --> mainscore(GLOBAL SCORE)
+        score[activeplayer] = score[activeplayer] + roundscore;
+
+        // update UI
+        document.getElementById('score-' + activeplayer).textContent = score[activeplayer];
+
+
+
+
+        // **************** for the input value box - user filled************************ 
+        document.querySelector('.maxscore').value = highestsc;
+        var winningscore;
+        if (highestsc) {
+            winningscore = highestsc;
+        }
+        else
+            winningscore = 20;
+
+
+        // WINNING LOGIC  ----------  winner class is not present in html it is a class that directly present in the css file
+        if (score[activeplayer] >= winningscore) {
+
+            if (activeplayer === 0)
+                document.getElementById('name-0').textContent = '|| WINNER ||' + " " + name3;
+
+            else
+                document.getElementById('name-1').textContent = '|| WINNER ||' + " " + name4;
+
+            diceselect.style.display = "none";
+            document.querySelector('#current-' + activeplayer).textContent = '0';
+            document.querySelector('.player-' + activeplayer + '-panel').classList.add('winner');
+            document.querySelector('.player-' + activeplayer + '-panel').classList.remove('active');
+            playgame = false;
+        }
+        else
+            // nextplayer ---- using DRY PRINCIPLE 
+            nextplayer();
+
+        rolldice = 1;
+    }
 }
 
 // load service worker

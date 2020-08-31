@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dice-v2'; // increment this when updating the web site
+const CACHE_NAME = 'dice-v4'; // increment this when updating the web site
 const urlsToCache = [
   './index.html',
   './manifest.webmanifest',
