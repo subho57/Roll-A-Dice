@@ -69,12 +69,12 @@ document.querySelector(".btn-hold").addEventListener('click', function() {
 
             if (activeplayer === 0) {
                 document.getElementById('name-0').textContent = '|| WINNER ||' + " " + name1;
-                document.getElementById('name-1').textContent = name2 + " " + '|| LOST ||';
+                document.getElementById('name-1').textContent = '|| LOSER ||' + " " + name2;
             }
 
             else {
                 document.getElementById('name-1').textContent = '|| WINNER ||' + " " + name2;
-                document.getElementById('name-0').textContent = name1 + " " + '|| LOST ||';
+                document.getElementById('name-0').textContent = '|| LOSER ||' + " " + name1;
             }
 
             diceselect.style.display = "none";
@@ -82,7 +82,8 @@ document.querySelector(".btn-hold").addEventListener('click', function() {
             document.querySelector('.player-' + activeplayer + '-panel').classList.add('winner');
             document.querySelector('.player-' + activeplayer + '-panel').classList.remove('active');
             playgame = false;
-        } else { // nextplayer ---- using DRY PRINCIPLE 
+        } else {
+            // nextplayer ---- using DRY PRINCIPLE 
             nextplayer();
         }
 
@@ -201,12 +202,12 @@ function comp() {
 
             if (activeplayer === 0) {
                 document.getElementById('name-0').textContent = '|| WINNER ||' + " " + name1;
-                document.getElementById('name-1').textContent = name2 + " " + '|| LOST ||';
+                document.getElementById('name-1').textContent = '|| LOSER ||' + " " + name2;
             }
 
             else {
                 document.getElementById('name-1').textContent = '|| WINNER ||' + " " + name2;
-                document.getElementById('name-0').textContent = name1 + " " + '|| LOST ||';
+                document.getElementById('name-0').textContent = '|| LOSER ||' + " " + name1;
             }
 
             diceselect.style.display = "none";
