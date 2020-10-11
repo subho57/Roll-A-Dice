@@ -1,54 +1,20 @@
 // Niharika Dutta | @canvas-nd
-
-var socket=io();
-
-var user=[];
 alert("GAME RULES :: \n\n 1) Click on ROLL DICE to start a Game.\n 2) CURRENT SCORE will be added & display GLOBALLY on clicking PASS BUTTON.\n 3)Which implies that the Opposite player will get the chance for rolling and it continues .... \n 4) You can also click on NEW GAME for another match. \n \n                                           || BEST OF LUCK || \n");
 var highestsc = prompt("ENTER THE MAX SCORE: ");
-var choice = prompt("SELECT GAMEPLAY :\n 1) PLAYER VS PLAYER \n 2) PLAYER VS COMPUTER \n 3) MULTIPLAYER");
+var choice = prompt("SELECT GAMEPLAY :\n 1) PLAYER VS PLAYER \n 2) PLAYER VS COMPUTER ");
 if (choice === '1') {
     var name1 = prompt("ENTER PLAYER 1 NAME :");
     var name2 = prompt("ENTER PLAYER 2 NAME :");
-} if(choice== '2') {
+} else {
     var name1 = prompt("ENTER PLAYER NAME :");
     var name2 = "COMPUTER";
 }
-else 
-if(choice==3)
-{
-    var name1 = prompt("ENTER PLAYER NAME :");
-    var  name2;
-    user.push(name1);
-socket.emit('player',name1);    
-socket.on('otheruser',(user)=>{
-       
-       other(user);
-       console.log(user);
-      
-    });
-  
-    var  count=0;
-    function other(user){
-    
-    document.querySelector('.player-1-panel #name-1').innerHTML=`${user[count]}`; 
-    starting_requirement(user[count]);
-    count++;
-   
-}
-roll_dice();
-  name2=document.querySelector('.player-1-panel #name-1').innerText;
-}
-
 
 var scores, roundscore, activeplayer, dice, playgame, rolldice;
 var diceselect = document.querySelector('.dice');
 
+starting_requirement();
 
-if(choice!==3){
-    starting_requirement();
-    //roll_dice();
-}
-//roll_dice();
 /* means #current-0 & #current-1 will be altered player basis----- so we r taking an activeplayer variable for 
 that 0/1 alternative tn we r implementing a string in a '' */
 
@@ -57,41 +23,27 @@ diceselect.style.display = "none";
 rolldice = 1;
 
 // ############ || playgame STATE VARIABLE playgame WILL ASSURE THAT AFTER WINNER DECLARED, HOLD &  ROLL BTN WILL BE FREEZED || #########
-function roll_dice(){
-    document.querySelector('.btn-roll').addEventListener('click', function() {
 
-        if (rolldice === 1) {
-            if (playgame) {
-                // random no. create
-                if(choice!=3)
-                {
-                var dice = Math.floor(Math.random() * 6) + 1;
-                // display result
-                rollOutput(dice);
-               // rolldice = 0;
-                }
-                else
-                {
-                var c=1;
-                socket.emit('rolldice','');
-                }
-            }
+document.querySelector('.btn-roll').addEventListener('click', function() {
+
+    if (rolldice === 1) {
+        if (playgame) {
+            // random no. create
+            var dice = Math.floor(Math.random() * 6) + 1;
+
+            // display result
+            diceselect.style.display = 'block';
+            diceselect.src = 'images/roll-dice/dice-' + dice + '.png';
+            console.log(dice);
+
+            roundscore = roundscore + dice;
+            document.querySelector('#current-' + activeplayer).textContent = roundscore;
+
+            rolldice = 0;
         }
-    });
-    
-}
-socket.on('msg2',(dice)=>{
-    console.log(dice);
-    rollOutput(dice);
+    }
 });
-function rollOutput(dice){
-    diceselect.style.display = 'block';
-    diceselect.src = 'images/roll-dice/dice-' + dice + '.png';
 
-    roundscore = roundscore + dice;
-    document.querySelector('#current-' + activeplayer).textContent = roundscore;
-    rolldice = 0;
-}
 // Niharika Dutta | @canvas-nd
 
 document.querySelector(".btn-hold").addEventListener('click', function() {
@@ -102,7 +54,7 @@ document.querySelector(".btn-hold").addEventListener('click', function() {
 
         // update UI
         document.getElementById('score-' + activeplayer).textContent = score[activeplayer];
-        socket.emit('score',({score:score[activeplayer],active:activeplayer}));
+
         // **************** for the input value box - user filled************************ 
         document.querySelector('.maxscore').value = highestsc;
         var winningscore;
@@ -142,15 +94,9 @@ document.querySelector(".btn-hold").addEventListener('click', function() {
         }
     }
 });
-socket.on('scorecard',(play)=>{
-console.log(play);
-player=play.active;
-player===0?player=1:player=0;
-document.getElementById('score-' + player).textContent = play.score;
-nextplayer();
-});
+
 // Niharika Dutta | @canvas-nd
-function nextplayer(name2) {
+function nextplayer() {
     if (choice === '1') {
         if ((activeplayer === 0))
             document.querySelector('#player-00').textContent = name2 + "'s" + "  " + "  turn";
@@ -185,7 +131,7 @@ function nextplayer(name2) {
 
 document.querySelector(".btn-new").addEventListener('click', starting_requirement);
 
-function starting_requirement(name2) {
+function starting_requirement() {
     score = [0, 0]; //array
     roundscore = 0;
     activeplayer = 0; //1st player starts the game.
@@ -215,7 +161,7 @@ function starting_requirement(name2) {
 // Niharika Dutta | @canvas-nd
 // *************************** FUNTIONALITY FOR COMPUTER'S TURN **********************************
 
-function comp(name2) {
+function comp() {
     if (rolldice === 1) {
         if (playgame) {
             // random no. create
